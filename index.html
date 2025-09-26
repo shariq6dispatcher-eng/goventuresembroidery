@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoVentures Embroidery - Home</title>
+  <style>
+    :root {
+      --primary: #e91e63;
+      --dark: #1a1a1a;
+      --light: #fff;
+      --muted: #777;
+      --radius: 12px;
+      --gradient: linear-gradient(-45deg, #ff80ab, #e91e63, #ad1457, #880e4f);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--light); color: var(--dark); line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Header */
+    header {
+      background: var(--light);
+      padding: 15px 30px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: auto; }
+    .logo { font-size: 22px; font-weight: bold; color: var(--primary); }
+    nav ul { list-style: none; display: flex; gap: 20px; }
+    nav ul li a { font-weight: 500; transition: color .2s; }
+    nav ul li a:hover { color: var(--primary); }
+    .btn {
+      background: var(--primary);
+      color: var(--light);
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: all .3s;
+      display: inline-block;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(233,30,99,.5);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--gradient);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      color: var(--light);
+      padding: 80px 20px 120px;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-text {
+      flex: 1.2;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      animation: fadeInUp 1s ease forwards;
+    }
+    .hero-text .tagline {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 30px;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .hero-text h1 {
+      font-size: 52px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, #fff, #ffd1e3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-text p {
+      font-size: 18px;
+      margin-bottom: 25px;
+      max-width: 500px;
+    }
+    .hero-img { flex: 1; text-align: center; }
+    .hero-img img {
+      width: 100%;
+      max-width: 420px;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 25px rgba(0,0,0,.4);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* Floating Embroidery Icons */
+    .floating-icon {
+      position: absolute;
+      width: 60px;
+      opacity: 0.6;
+      animation: floatIcons 10s linear infinite;
+    }
+    @keyframes floatIcons {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(20deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    .icon1 { top: 20%; left: 5%; animation-delay: 0s; }
+    .icon2 { top: 10%; right: 8%; animation-delay: 2s; }
+    .icon3 { bottom: 15%; left: 10%; animation-delay: 4s; }
+    .icon4 { bottom: 10%; right: 12%; animation-delay: 6s; }
+
+    /* Sections */
+    section { padding: 80px 20px; }
+    section h2 { text-align: center; font-size: 34px; margin-bottom: 40px; }
+
+    /* About */
+    .about { max-width: 1100px; margin: auto; display: flex; gap: 40px; flex-wrap: wrap; align-items: center; }
+    .about img { width: 100%; max-width: 450px; border-radius: var(--radius); box-shadow: 0 10px 20px rgba(0,0,0,.1); }
+    .about-text { flex: 1; }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .service-card {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: 0 6px 16px rgba(0,0,0,.08);
+      transition: all .3s;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(233,30,99,.25);
+    }
+    .service-card img { width: 80px; margin-bottom: 15px; }
+    .service-card h3 { color: var(--primary); margin-bottom: 10px; }
+    .service-card p { color: var(--muted); font-size: 15px; }
+
+
+.carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  overflow: visible;   /* allow prev/next slides to show */
+  perspective: 1200px;
+  height: 500px;
+}
+
+/* FIX: position each slide absolutely inside the carousel */
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 50%;                  /* center reference point */
+  transform: translateX(-50%) scale(0.8);
+  width: 65%;                 /* active image width */
+  height: 100%;
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* better for embroidery logos */
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  z-index: 3;
+  transform: translateX(-50%) scale(1) rotateY(0);
+}
+
+.carousel-slide.prev {
+  opacity: 0.6;
+  z-index: 2;
+  transform: translateX(-35%) scale(0.85) rotateY(20deg); /* FIXED */
+  filter: blur(2px);
+}
+
+.carousel-slide.next {
+  opacity: 0.6;
+  z-index: 2;
+  transform: translateX(35%) scale(0.85) rotateY(-20deg);
+  filter: blur(2px);
+}
+
+
+/* Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  border: none;
+  font-size: 34px;
+  padding: 12px 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 5;
+}
+.carousel-btn:hover {
+  background: rgba(255,255,255,0.4);
+}
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+.caption {
+  color: #fff;
+  font-size: 18px;
+  padding: 12px 20px;
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  background: rgba(233,30,99,0.8);
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Fade animation */
+.fade {
+  animation: fadeEffect 1.5s;
+}
+
+@keyframes fadeEffect {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    /* Stats */
+    .stats {
+      background: var(--gradient);
+      color: var(--light);
+      padding: 60px 20px;
+      margin-top: 60px;
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      text-align: center;
+    }
+    .stat h3 { font-size: 36px; margin-bottom: 5px; }
+    .stat p { font-size: 15px; }
+
+    /* CTA Banner */
+    .cta { text-align: center; background: var(--gradient); color: #fff; padding: 60px 20px; }
+    .cta h2 { font-size: 32px; margin-bottom: 20px; }
+    .cta .btn { background: #fff; color: var(--primary); }
+
+    /* Footer */
+    footer { background: var(--dark); padding: 30px; text-align: center; }
+    footer p { color: #ccc; font-size: 14px; margin-bottom: 10px; }
+    .socials { display: flex; gap: 15px; justify-content: center; }
+    .socials a { color: var(--light); font-size: 20px; transition: .2s; }
+    .socials a:hover { color: var(--primary); }
+
+    @keyframes fadeInUp { 0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);} }
+    @media (max-width: 768px) { .hero-inner{flex-direction:column;text-align:center;} .about{flex-direction:column;} }
+
+/* About Section */
+.about-section {
+  background: #fafafa;
+  padding: 100px 20px;
+}
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.about-image {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+}
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 15px 30px rgba(0,0,0,.1);
+  transition: transform .4s;
+}
+.about-image img:hover {
+  transform: scale(1.03);
+}
+.about-text { flex: 1; }
+.about-text h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+.about-text p {
+  margin-bottom: 20px;
+  color: #555;
+  font-size: 16px;
+}
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+.highlight {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.05);
+  transition: transform .3s, box-shadow .3s;
+  text-align: center;
+}
+.highlight:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(233,30,99,.25);
+}
+.highlight span {
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+}
+.highlight h4 {
+  margin-bottom: 8px;
+  color: var(--dark);
+}
+.highlight p {
+  font-size: 14px;
+  color: var(--muted);
+}
+/* =========================
+   Modern Header Portfolio Theme
+   ========================= */
+.header-portfolio {
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  padding: 120px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Abstract floating shapes */
+.header-portfolio::before,
+.header-portfolio::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  z-index: 0;
+}
+.header-portfolio::before {
+  width: 300px;
+  height: 300px;
+  background: #ff80ab;
+  top: -100px;
+  left: -80px;
+}
+.header-portfolio::after {
+  width: 250px;
+  height: 250px;
+  background: #e91e63;
+  bottom: -120px;
+  right: -60px;
+}
+
+/* Title */
+.header-portfolio h2 {
+  color: #f25278;
+  font-size: 38px;
+  margin-bottom: 50px;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+/* Glassmorphic carousel container */
+.header-portfolio .carousel {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  z-index: 2;
+  position: relative;
+}
+
+/* Slide styling */
+.header-portfolio .carousel-slide img {
+  border-radius: 20px;
+  box-shadow: 0 16px 30px rgba(0,0,0,0.15);
+  transition: transform 0.4s;
+}
+.header-portfolio .carousel-slide.active img {
+  transform: scale(1.05);
+}
+
+/* Modern buttons */
+.header-portfolio .carousel-btn {
+  background: rgba(233,30,99,0.9);
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  padding: 14px 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(233,30,99,0.4);
+  transition: all 0.3s ease;
+}
+.header-portfolio .carousel-btn:hover {
+  transform: scale(1.1);
+  background: #e91e63;
+  box-shadow: 0 8px 28px rgba(233,30,99,0.55);
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav">
+      <div class="logo">GoVentures Embroidery</div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="testimonials.html">Testimonials</a></li>
+          <li><a class="btn" href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<section class="portfolio header-portfolio">
+  <h2>Welcome to Goventures Embroidery!</h2>
+  <div class="carousel">
+    <button class="carousel-btn prev-btn">‹</button>
+
+    <div class="carousel-slide"><img src="images/portfolio1.jpg" alt="Portfolio 1"></div>
+    <div class="carousel-slide"><img src="images/mockup1.png" alt="Portfolio 1"></div>
+    <div class="carousel-slide"><img src="images/portfolio2.jpg" alt="Portfolio 2"></div>
+    <div class="carousel-slide"><img src="images/mockup2.png" alt="Portfolio 2"></div>
+    <div class="carousel-slide"><img src="images/portfolio3.jpg" alt="Portfolio 3"></div>
+    <div class="carousel-slide"><img src="images/mockup3.png" alt="Portfolio 3"></div>
+    <div class="carousel-slide"><img src="images/portfolio4.jpg" alt="Portfolio 4"></div>
+    <div class="carousel-slide"><img src="images/mockup4.png" alt="Portfolio 4"></div>
+
+    <button class="carousel-btn next-btn">›</button>
+  </div>
+</section>
+
+  <!-- Hero -->
+  <section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="tagline">Fast • Affordable • Professional</span>
+      <h1>Premium Embroidery Digitizing</h1>
+      <p>Transforming your logos and designs into flawless, machine-ready embroidery files with speed, precision, and professional quality.</p>
+      <a href="services.html" class="btn">✨ Explore Services</a>
+      <a href="contact.html" class="btn" style="background:#fff; color:#e91e63;">📩 Get a Quote</a>
+    </div>
+    <div class="hero-img">
+      <img src="images/Machine.png" alt="Embroidery Machine">
+    </div>
+  </div>
+
+    <!-- Floating Embroidery Icons -->
+  <img src="https://cdn-icons-png.flaticon.com/512/1198/1198563.png" class="floating-icon icon1" alt="Needle & Thread">
+  <img src="https://cdn-icons-png.flaticon.com/512/3061/3061188.png" class="floating-icon icon2" alt="Embroidery Hoop">
+  <img src="https://cdn-icons-png.flaticon.com/512/941/941684.png" class="floating-icon icon3" alt="Sewing Machine">
+  <img src="https://cdn-icons-png.flaticon.com/512/4205/4205373.png" class="floating-icon icon4" alt="Fabric & Scissors">
+
+</section>
+
+
+  <!-- About -->
+<section class="about-section">
+  <div class="about-container">
+    <div class="about-image">
+      <img src="images/about.png" alt="GoVentures Team at Work">
+    </div>
+    <div class="about-text">
+      <h2>About GoVentures Embroidery</h2>
+      <p>
+        GoVentures Embroidery is more than just digitizing – we’re your creative partner 
+        in bringing designs to life. With years of experience, global clientele, and 
+        a passion for precision, we deliver digitized files that run smoothly on any 
+        machine and produce flawless embroidery results.
+      </p>
+      <p>
+        From simple logos to complex illustrations, our skilled team uses the latest 
+        software and techniques to ensure every stitch is optimized for quality, 
+        speed, and durability.
+      </p>
+
+      <div class="about-highlights">
+        <div class="highlight">
+          <span>⚡</span>
+          <h4>Fast Turnaround</h4>
+          <p>Most orders delivered within 12–24 hours, without compromising quality.</p>
+        </div>
+        <div class="highlight">
+          <span>💎</span>
+          <h4>Premium Quality</h4>
+          <p>We fine-tune every detail, ensuring sharp lines, smooth curves, and 
+          optimized stitch paths.</p>
+        </div>
+        <div class="highlight">
+          <span>🌍</span>
+          <h4>Trusted Worldwide</h4>
+          <p>Serving clients across the US, UK, Canada, Australia, and more with 
+          consistent 5-star service.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Services -->
+<section class="services">
+  <h2>Our Expertise</h2>
+  <p style="max-width:800px;margin:0 auto 50px;color:#555;font-size:17px;">
+    At GoVentures Embroidery, we specialize in transforming your artwork into precise, machine-ready files. 
+    Our digitizing experts ensure flawless stitches, smooth runs, and optimized results for any fabric type.
+  </p>
+  <div class="services-grid">
+    
+    <!-- Logo Digitizing -->
+    <div class="service-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1829/1829589.png" alt="Logo Digitizing">
+      <h3>Logo Digitizing</h3>
+      <p>
+        High-quality digitizing for business logos, emblems, and branding.
+        We optimize stitch density, underlay, and pathing to achieve professional results across caps, shirts, and jackets.
+      </p>
+    </div>
+    
+    <!-- Vector Art Conversion -->
+    <div class="service-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1829/1829445.png" alt="Vector Art">
+      <h3>Vector Art Conversion</h3>
+      <p>
+        Clean and scalable vector files for both embroidery and printing.
+        We redraw your artwork to ensure sharp details and perfect color separation.
+      </p>
+    </div>
+    
+    <!-- 3D Puff Digitizing -->
+    <div class="service-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/747/747086.png" alt="3D Puff">
+      <h3>3D Puff Digitizing</h3>
+      <p>
+        Add depth and dimension to your designs with 3D puff digitizing.
+        Perfect for hats, outerwear, and bold designs that stand out.
+      </p>
+    </div>
+    
+    <!-- Custom Artwork -->
+    <div class="service-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/1029/1029183.png" alt="Custom Artwork">
+      <h3>Custom Artwork Digitizing</h3>
+      <p>
+        Complex illustrations, mascots, and creative designs digitized with accuracy.
+        Our team ensures every stitch captures the essence of your original art.
+      </p>
+    </div>
+    
+  </div>
+</section>
+
+
+<!-- Portfolio -->
+<section class="portfolio" style="background: linear-gradient(135deg,#ff80ab,#e91e63,#ad1457); padding: 100px 20px;">
+  <h2 style="color:#fff;">Our Portfolio</h2>
+  <div class="carousel">
+    <button class="carousel-btn prev-btn">‹</button>
+
+    <div class="carousel-slide"><img src="images/mockup1.png" alt="Portfolio 1"></div>
+    <div class="carousel-slide"><img src="images/mockup2.png" alt="Portfolio 2"></div>
+    <div class="carousel-slide"><img src="images/mockup3.png" alt="Portfolio 3"></div>
+    <div class="carousel-slide"><img src="images/mockup4.jpg" alt="Portfolio 4"></div>
+
+    <button class="carousel-btn next-btn">›</button>
+  </div>
+</section>
+
+
+
+
+  <!-- Stats -->
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="stat"><h3 data-count="10000">0</h3><p>Logos Digitized</p></div>
+      <div class="stat"><h3 data-count="48">0</h3><p>Turnaround Time (hrs)</p></div>
+      <div class="stat"><h3 data-count="100">0%</h3><p>Satisfaction Guarantee</p></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Ready to Transform Your Designs?</h2>
+    <a href="contact.html" class="btn">📩 Get Started Now</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© <span id="year"></span> GoVentures Embroidery. All rights reserved.</p>
+    <div class="socials">
+      <a href="#">🌐</a><a href="#">📷</a><a href="mailto:info@goventures.com">✉️</a>
+    </div>
+  </footer>
+
+<script>
+  // Dynamic Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Stats Count-up
+  const counters = document.querySelectorAll('[data-count]');
+  let animated = false;
+  window.addEventListener('scroll', () => {
+    const section = document.querySelector('.stats');
+    if(!animated && section.getBoundingClientRect().top < window.innerHeight) {
+      counters.forEach(counter => {
+        const update = () => {
+          const target = +counter.getAttribute('data-count');
+          const count = +counter.innerText.replace(/\D/g,'');
+          const inc = target / 200;
+          if(count < target) {
+            counter.innerText = Math.ceil(count + inc) + (counter.innerText.includes('%') ? '%' : '');
+            setTimeout(update, 30);
+          } else { 
+            counter.innerText = target + (counter.innerText.includes('%') ? '%' : ''); 
+          }
+        };
+        update();
+      });
+      animated = true;
+    }
+  });
+
+  window.addEventListener("load", () => {
+  let currentIndex = 1;
+  const carousel = document.querySelector(".portfolio .carousel");
+  const slides = carousel.querySelectorAll(".carousel-slide");
+  const totalSlides = slides.length;
+
+  // Clone first & last for seamless loop
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[slides.length - 1].cloneNode(true);
+
+  carousel.insertBefore(lastClone, slides[0]);
+  carousel.appendChild(firstClone);
+
+  let newSlides = carousel.querySelectorAll(".carousel-slide");
+  let newTotal = newSlides.length;
+
+  function updateCarousel() {
+    newSlides.forEach((slide, i) => {
+      slide.classList.remove("active", "prev", "next");
+      if (i === currentIndex) {
+        slide.classList.add("active");
+      } else if (i === (currentIndex - 1 + newTotal) % newTotal) {
+        slide.classList.add("prev");
+      } else if (i === (currentIndex + 1) % newTotal) {
+        slide.classList.add("next");
+      }
+    });
+  }
+
+  function nextSlide() {
+    currentIndex++;
+    if (currentIndex >= newTotal) {
+      currentIndex = 1;
+    }
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentIndex--;
+    if (currentIndex < 0) {
+      currentIndex = newTotal - 2;
+    }
+    updateCarousel();
+  }
+
+  // Auto-slide
+  let autoSlide = setInterval(nextSlide, 3000);
+  function resetAutoSlide() {
+    clearInterval(autoSlide);
+    autoSlide = setInterval(nextSlide, 3000);
+  }
+
+  // Buttons
+  carousel.querySelector(".next-btn").addEventListener("click", () => {
+    nextSlide();
+    resetAutoSlide();
+  });
+  carousel.querySelector(".prev-btn").addEventListener("click", () => {
+    prevSlide();
+    resetAutoSlide();
+  });
+
+  // Init after everything loads
+  updateCarousel();
+});
+
+</script>
+
+
+</body>
+</html>
