@@ -199,47 +199,68 @@
   /* ===============================
      Carousel
      =============================== */
-  @media (max-width: 992px) {
   .carousel {
-    flex-direction: column;
-    height: auto;
-    max-width: 100%;
-    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 1000px;
+    margin: auto;
+    overflow: visible;
+    perspective: 1200px;
+    height: 500px;
   }
-
   .carousel-slide {
-    position: relative !important;
-    transform: none !important;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 65%;
+    height: 100%;
+    transform: translateX(-50%) scale(0.8);
     opacity: 0;
-    transition: opacity 0.5s ease;
-    width: 100% !important;
-    margin: 0 auto;
-    filter: none !important;
+    transition: all 0.8s ease;
   }
-
-  .carousel-slide.active {
-    opacity: 1 !important;
-  }
-
   .carousel-slide img {
     width: 100%;
-    max-height: 240px;
+    height: 100%;
     object-fit: contain;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
   }
-
+  .carousel-slide.active {
+    opacity: 1;
+    z-index: 3;
+    transform: translateX(-50%) scale(1) rotateY(0);
+  }
+  .carousel-slide.prev {
+    opacity: 0.6;
+    z-index: 2;
+    transform: translateX(-35%) scale(0.85) rotateY(20deg);
+    filter: blur(2px);
+  }
+  .carousel-slide.next {
+    opacity: 0.6;
+    z-index: 2;
+    transform: translateX(35%) scale(0.85) rotateY(-20deg);
+    filter: blur(2px);
+  }
   .carousel-btn {
-    font-size: 24px;
-    padding: 8px 12px;
-    top: unset;
-    bottom: -30px;
-    transform: none;
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    border: none;
+    font-size: 34px;
+    padding: 12px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+    z-index: 5;
   }
-
-  .prev-btn { left: 30%; }
-  .next-btn { right: 30%; }
-}
-
+  .carousel-btn:hover { background: rgba(255,255,255,0.4); }
+  .prev-btn { left: 20px; }
+  .next-btn { right: 20px; }
 
   .caption {
     color: #fff;
@@ -495,6 +516,27 @@
 
     .services-grid { grid-template-columns: 1fr; gap: 20px; }
     .service-card { text-align: center; }
+
+    @media (max-width: 992px) {
+  .carousel {
+    height: auto;
+    max-width: 100%;
+  }
+  .carousel-slide {
+    width: 100% !important;
+    position: relative;
+    opacity: 0 !important;
+    transform: translateX(-50%) scale(1) !important;
+    filter: none !important;
+  }
+  .carousel-slide.active {
+    opacity: 1 !important;
+  }
+  .carousel-slide img {
+    max-height: 250px;
+    object-fit: contain;
+  }
+}
 
     .carousel-btn { font-size: 24px; padding: 8px 12px; }
 
@@ -772,69 +814,70 @@
     }
   });
 
- <script>
-window.addEventListener("load", () => {
-  document.querySelectorAll(".carousel").forEach((carousel) => {
-    let slides = carousel.querySelectorAll(".carousel-slide");
-    let currentIndex = 1;
+  window.addEventListener("load", () => {
+  let currentIndex = 1;
+  const carousel = document.querySelector(".portfolio .carousel");
+  const slides = carousel.querySelectorAll(".carousel-slide");
+  const totalSlides = slides.length;
 
-    // Clone first and last slides for loop
-    const firstClone = slides[0].cloneNode(true);
-    const lastClone = slides[slides.length - 1].cloneNode(true);
+  // Clone first & last for seamless loop
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[slides.length - 1].cloneNode(true);
 
-    carousel.insertBefore(lastClone, slides[0]);
-    carousel.appendChild(firstClone);
+  carousel.insertBefore(lastClone, slides[0]);
+  carousel.appendChild(firstClone);
 
-    slides = carousel.querySelectorAll(".carousel-slide");
-    const totalSlides = slides.length;
+  let newSlides = carousel.querySelectorAll(".carousel-slide");
+  let newTotal = newSlides.length;
 
-    function updateCarousel() {
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active", "prev", "next");
-        if (i === currentIndex) {
-          slide.classList.add("active");
-        } else if (i === (currentIndex - 1 + totalSlides) % totalSlides) {
-          slide.classList.add("prev");
-        } else if (i === (currentIndex + 1) % totalSlides) {
-          slide.classList.add("next");
-        }
-      });
+  function updateCarousel() {
+    newSlides.forEach((slide, i) => {
+      slide.classList.remove("active", "prev", "next");
+      if (i === currentIndex) {
+        slide.classList.add("active");
+      } else if (i === (currentIndex - 1 + newTotal) % newTotal) {
+        slide.classList.add("prev");
+      } else if (i === (currentIndex + 1) % newTotal) {
+        slide.classList.add("next");
+      }
+    });
+  }
+
+  function nextSlide() {
+    currentIndex++;
+    if (currentIndex >= newTotal) {
+      currentIndex = 1;
     }
-
-    function nextSlide() {
-      currentIndex = (currentIndex + 1) % totalSlides;
-      updateCarousel();
-    }
-
-    function prevSlide() {
-      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-      updateCarousel();
-    }
-
-    // Auto-slide
-    let autoSlide = setInterval(nextSlide, 4000);
-    function resetAutoSlide() {
-      clearInterval(autoSlide);
-      autoSlide = setInterval(nextSlide, 4000);
-    }
-
-    // Buttons
-    const nextBtn = carousel.querySelector(".next-btn");
-    const prevBtn = carousel.querySelector(".prev-btn");
-    if (nextBtn && prevBtn) {
-      nextBtn.addEventListener("click", () => {
-        nextSlide();
-        resetAutoSlide();
-      });
-
-      prevBtn.addEventListener("click", () => {
-        prevSlide();
-        resetAutoSlide();
-      });
-    }
-
     updateCarousel();
+  }
+
+  function prevSlide() {
+    currentIndex--;
+    if (currentIndex < 0) {
+      currentIndex = newTotal - 2;
+    }
+    updateCarousel();
+  }
+
+  // Auto-slide
+  let autoSlide = setInterval(nextSlide, 3000);
+  function resetAutoSlide() {
+    clearInterval(autoSlide);
+    autoSlide = setInterval(nextSlide, 3000);
+  }
+
+  // Buttons
+  carousel.querySelector(".next-btn").addEventListener("click", () => {
+    nextSlide();
+    resetAutoSlide();
   });
+  carousel.querySelector(".prev-btn").addEventListener("click", () => {
+    prevSlide();
+    resetAutoSlide();
+  });
+
+  // Init after everything loads
+  updateCarousel();
 });
 
 </script>
@@ -844,32 +887,7 @@ window.addEventListener("load", () => {
     document.querySelector("nav ul").classList.toggle("show");
   });
 </script>
-<script>
-document.querySelectorAll('.carousel').forEach(carousel => {
-  let startX = 0;
-  carousel.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-  });
-
-  carousel.addEventListener('touchend', e => {
-    let endX = e.changedTouches[0].clientX;
-    let diff = startX - endX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        carousel.querySelector('.next-btn')?.click();
-      } else {
-        carousel.querySelector('.prev-btn')?.click();
-      }
-    }
-  });
-});
-</script>
 
 </body>
 
 </html>
-
-
-
-
-
