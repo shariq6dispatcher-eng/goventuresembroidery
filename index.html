@@ -833,73 +833,72 @@
     }
   });
 
-  window.addEventListener("load", () => {
-  let currentIndex = 1;
-  const carousel = document.querySelector(".portfolio .carousel");
-  const slides = carousel.querySelectorAll(".carousel-slide");
-  const totalSlides = slides.length;
+  <script>
+window.addEventListener("load", () => {
+  document.querySelectorAll(".carousel").forEach((carousel) => {
+    let slides = carousel.querySelectorAll(".carousel-slide");
+    let currentIndex = 1;
 
-  // Clone first & last for seamless loop
-  const firstClone = slides[0].cloneNode(true);
-  const lastClone = slides[slides.length - 1].cloneNode(true);
+    // Clone first and last slides for loop
+    const firstClone = slides[0].cloneNode(true);
+    const lastClone = slides[slides.length - 1].cloneNode(true);
 
-  carousel.insertBefore(lastClone, slides[0]);
-  carousel.appendChild(firstClone);
+    carousel.insertBefore(lastClone, slides[0]);
+    carousel.appendChild(firstClone);
 
-  let newSlides = carousel.querySelectorAll(".carousel-slide");
-  let newTotal = newSlides.length;
+    slides = carousel.querySelectorAll(".carousel-slide");
+    const totalSlides = slides.length;
 
-  function updateCarousel() {
-    newSlides.forEach((slide, i) => {
-      slide.classList.remove("active", "prev", "next");
-      if (i === currentIndex) {
-        slide.classList.add("active");
-      } else if (i === (currentIndex - 1 + newTotal) % newTotal) {
-        slide.classList.add("prev");
-      } else if (i === (currentIndex + 1) % newTotal) {
-        slide.classList.add("next");
-      }
-    });
-  }
-
-  function nextSlide() {
-    currentIndex++;
-    if (currentIndex >= newTotal) {
-      currentIndex = 1;
+    function updateCarousel() {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active", "prev", "next");
+        if (i === currentIndex) {
+          slide.classList.add("active");
+        } else if (i === (currentIndex - 1 + totalSlides) % totalSlides) {
+          slide.classList.add("prev");
+        } else if (i === (currentIndex + 1) % totalSlides) {
+          slide.classList.add("next");
+        }
+      });
     }
-    updateCarousel();
-  }
 
-  function prevSlide() {
-    currentIndex--;
-    if (currentIndex < 0) {
-      currentIndex = newTotal - 2;
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateCarousel();
     }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    // Auto-slide
+    let autoSlide = setInterval(nextSlide, 4000);
+    function resetAutoSlide() {
+      clearInterval(autoSlide);
+      autoSlide = setInterval(nextSlide, 4000);
+    }
+
+    // Buttons
+    const nextBtn = carousel.querySelector(".next-btn");
+    const prevBtn = carousel.querySelector(".prev-btn");
+    if (nextBtn && prevBtn) {
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        resetAutoSlide();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        resetAutoSlide();
+      });
+    }
+
     updateCarousel();
-  }
-
-  // Auto-slide
-  let autoSlide = setInterval(nextSlide, 3000);
-  function resetAutoSlide() {
-    clearInterval(autoSlide);
-    autoSlide = setInterval(nextSlide, 3000);
-  }
-
-  // Buttons
-  carousel.querySelector(".next-btn").addEventListener("click", () => {
-    nextSlide();
-    resetAutoSlide();
   });
-  carousel.querySelector(".prev-btn").addEventListener("click", () => {
-    prevSlide();
-    resetAutoSlide();
-  });
-
-  // Init after everything loads
-  updateCarousel();
 });
-
 </script>
+
 
 <script>
   document.querySelector(".menu-toggle").addEventListener("click", () => {
@@ -910,4 +909,5 @@
 </body>
 
 </html>
+
 
