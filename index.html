@@ -504,20 +504,20 @@
      Responsive Fixes
      =============================== */
   @media (max-width: 992px) {
-    .hero-inner { flex-direction: column; text-align: center; gap: 20px; }
-    .hero-text { padding: 20px; }
-    .hero-text h1 { font-size: 34px; line-height: 1.2; }
-    .hero-text p { font-size: 16px; margin: 0 auto 20px; }
-    .hero-img img { max-width: 300px; }
+  .hero-inner { flex-direction: column; text-align: center; gap: 20px; }
+  .hero-text { padding: 20px; }
+  .hero-text h1 { font-size: 34px; line-height: 1.2; }
+  .hero-text p { font-size: 16px; margin: 0 auto 20px; }
+  .hero-img img { max-width: 300px; }
 
-    .about-container { flex-direction: column; text-align: center; gap: 30px; }
-    .about-image img { max-width: 100%; height: auto; }
-    .about-text h2 { font-size: 28px; }
+  .about-container { flex-direction: column; text-align: center; gap: 30px; }
+  .about-image img { max-width: 100%; height: auto; }
+  .about-text h2 { font-size: 28px; }
 
-    .services-grid { grid-template-columns: 1fr; gap: 20px; }
-    .service-card { text-align: center; }
+  .services-grid { grid-template-columns: 1fr; gap: 20px; }
+  .service-card { text-align: center; }
 
-    @media (max-width: 992px) {
+  /* ✅ Carousel mobile styles (moved out of nested media) */
   .carousel {
     height: auto;
     max-width: 100%;
@@ -526,7 +526,7 @@
     width: 100% !important;
     position: relative;
     opacity: 0 !important;
-    transform: translateX(-50%) scale(1) !important;
+    transform: none !important; /* remove translateX(-50%) */
     filter: none !important;
   }
   .carousel-slide.active {
@@ -536,51 +536,17 @@
     max-height: 250px;
     object-fit: contain;
   }
+
+  .carousel-btn { font-size: 24px; padding: 8px 12px; }
+
+  .stats-inner { flex-direction: column; gap: 20px; }
+  .stat h3 { font-size: 28px; }
+
+  .cta h2 { font-size: 24px; }
+  footer { padding: 20px; }
+  footer p { font-size: 12px; }
 }
 
-    .carousel-btn { font-size: 24px; padding: 8px 12px; }
-
-    .stats-inner { flex-direction: column; gap: 20px; }
-    .stat h3 { font-size: 28px; }
-
-    .cta h2 { font-size: 24px; }
-    footer { padding: 20px; }
-    footer p { font-size: 12px; }
-  }
-
-  @media (max-width: 576px) {
-    .hero-text h1 { font-size: 26px; }
-    .hero-text p { font-size: 14px; }
-    .btn {
-      display: block;
-      width: 100%;
-      margin: 10px auto;
-      padding: 12px;
-    }
-    .about-text h2 { font-size: 24px; }
-    section h2 { font-size: 26px; }
-  }
-
-   /* Mobile Nav Fix */
-@media (max-width: 992px) {
-  nav ul {
-    display: none;
-    flex-direction: column;
-    background: #fff;
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  }
-  nav ul.show {
-    display: flex;
-  }
-  nav ul li {
-    margin: 10px 0;
-  }
-}
 
 </style>
 
@@ -782,7 +748,9 @@
   <footer>
     <p>© <span id="year"></span> GoVentures Embroidery. All rights reserved.</p>
     <div class="socials">
-      <a href="#">🌐</a><a href="#">📷</a><a href="mailto:info@goventures.com">✉️</a>
+      <a href="#">🌐</a><a href="#">📷</a> <!-- replace the broken one with this -->
+<a href="mailto:info@goventures.com"✉️</a>
+
     </div>
   </footer>
 
@@ -891,5 +859,4 @@
 </body>
 
 </html>
-
 
