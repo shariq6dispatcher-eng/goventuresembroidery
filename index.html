@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GoVentures Embroidery - Home</title>
- <style>
+<style>
   :root {
     --primary: #e91e63;
     --dark: #1a1a1a;
@@ -37,6 +37,7 @@
     justify-content: space-between;
     max-width: 1200px;
     margin: auto;
+    position: relative;
   }
   .logo {
     font-size: 22px;
@@ -53,6 +54,14 @@
     transition: color .2s;
   }
   nav ul li a:hover { color: var(--primary); }
+  .menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--primary);
+  }
 
   .btn {
     background: var(--primary);
@@ -503,52 +512,68 @@
   /* ===============================
      Responsive Fixes
      =============================== */
-  @media (max-width: 992px) {
-  .hero-inner { flex-direction: column; text-align: center; gap: 20px; }
-  .hero-text { padding: 20px; }
-  .hero-text h1 { font-size: 34px; line-height: 1.2; }
-  .hero-text p { font-size: 16px; margin: 0 auto 20px; }
-  .hero-img img { max-width: 300px; }
+  @media (max-width: 768px) {
+    /* Navbar */
+    nav ul {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      background: #fff;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+    nav ul.show { display: flex; }
+    .menu-toggle { display: block; }
 
-  .about-container { flex-direction: column; text-align: center; gap: 30px; }
-  .about-image img { max-width: 100%; height: auto; }
-  .about-text h2 { font-size: 28px; }
+    /* Hero */
+    .hero-inner { flex-direction: column; text-align: center; gap: 20px; }
+    .hero-text { padding: 20px; }
+    .hero-text h1 { font-size: 34px; line-height: 1.2; }
+    .hero-text p { font-size: 16px; margin: 0 auto 20px; }
+    .hero-img img { max-width: 280px; }
 
-  .services-grid { grid-template-columns: 1fr; gap: 20px; }
-  .service-card { text-align: center; }
+    /* About */
+    .about-container { flex-direction: column; text-align: center; gap: 30px; }
+    .about-text h2 { font-size: 28px; }
 
-  /* ✅ Carousel mobile styles (moved out of nested media) */
-  .carousel {
-    height: auto;
-    max-width: 100%;
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 20px; }
+    .service-card { text-align: center; }
+
+    /* Carousel */
+    .carousel {
+      height: auto;
+      max-width: 100%;
+      overflow: hidden;
+    }
+    .carousel-slide {
+      position: relative !important;
+      width: 100% !important;
+      opacity: 0 !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    .carousel-slide.active { opacity: 1 !important; }
+    .carousel-slide img { max-height: 220px; object-fit: contain; margin: auto; }
+    .carousel-btn { font-size: 22px; padding: 6px 10px; }
+
+    /* Stats */
+    .stats-inner { flex-direction: column; gap: 20px; }
+    .stat h3 { font-size: 28px; }
+
+    /* CTA */
+    .cta h2 { font-size: 24px; }
+
+    /* Footer */
+    footer { padding: 20px; }
+    footer p { font-size: 12px; }
   }
-  .carousel-slide {
-    width: 100% !important;
-    position: relative;
-    opacity: 0 !important;
-    transform: none !important; /* remove translateX(-50%) */
-    filter: none !important;
-  }
-  .carousel-slide.active {
-    opacity: 1 !important;
-  }
-  .carousel-slide img {
-    max-height: 250px;
-    object-fit: contain;
-  }
-
-  .carousel-btn { font-size: 24px; padding: 8px 12px; }
-
-  .stats-inner { flex-direction: column; gap: 20px; }
-  .stat h3 { font-size: 28px; }
-
-  .cta h2 { font-size: 24px; }
-  footer { padding: 20px; }
-  footer p { font-size: 12px; }
-}
-
-
 </style>
+
 
 </head>
 <body>
