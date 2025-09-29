@@ -10,12 +10,12 @@
       --dark: #1a1a1a;
       --light: #fff;
       --muted: #777;
-      --radius: 16px;
-      --gradient: linear-gradient(-45deg, #ff80ab, #e91e63, #ad1457, #880e4f);
+      --radius: 18px;
+      --gradient: linear-gradient(135deg, #ff80ab, #e91e63, #ad1457, #880e4f);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--light); color: var(--dark); line-height: 1.6; }
+    body { background: #f9f9f9; color: var(--dark); line-height: 1.6; }
 
     header {
       background: var(--light);
@@ -26,49 +26,61 @@
       z-index: 50;
     }
     .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: var(--primary);
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-    nav ul li a { font-weight: 500; color: var(--dark); }
-    nav ul li a:hover { color: var(--primary); }
-.menu-toggle { display: none; font-size: 28px; cursor: pointer; color: var(--primary); background: none; border: none; }    
-.btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    position: relative;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary);
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  nav ul li a {
+    font-weight: 500;
+    transition: color .2s;
+  }
+  nav ul li a:hover { color: var(--primary); }
+  .menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--primary);
+  }
+
+    .btn {
       background: var(--primary);
       color: var(--light);
-      padding: 10px 20px;
+      padding: 12px 24px;
       border-radius: var(--radius);
       font-weight: 600;
       transition: all .3s;
       display: inline-block;
     }
-    .btn:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(233,30,99,.5); }
+    .btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(233,30,99,.4); }
 
     /* Header Banner */
     .page-header {
       background: var(--gradient);
       color: #fff;
       text-align: center;
-      padding: 100px 20px;
-      background-size: 400% 400%;
-      animation: gradientBG 12s ease infinite;
+      padding: 120px 20px;
+      background-size: 300% 300%;
+      animation: gradientBG 15s ease infinite;
     }
     .page-header h1 {
-      font-size: 42px;
+      font-size: 46px;
       font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
     .page-header p { font-size: 18px; opacity: 0.9; }
 
@@ -78,67 +90,71 @@
       margin: 80px auto;
       padding: 0 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap: 35px;
     }
     .price-card {
-      background: #fff;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(12px);
       border-radius: var(--radius);
-      padding: 40px 25px;
+      padding: 45px 30px;
       text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-      transition: transform .3s, box-shadow .3s;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      transition: transform .35s, box-shadow .35s;
       position: relative;
-      overflow: hidden;
     }
     .price-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(233,30,99,0.25);
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(233,30,99,0.3);
     }
     .price-card h3 {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: var(--dark);
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: 700;
     }
     .price {
-      font-size: 36px;
+      font-size: 40px;
       font-weight: 800;
       color: var(--primary);
-      margin-bottom: 20px;
+      margin: 20px 0;
     }
     .features {
       list-style: none;
       text-align: left;
-      margin: 20px 0;
+      margin: 25px 0;
       padding: 0;
     }
     .features li {
-      padding: 8px 0;
+      padding: 10px 0;
       font-size: 15px;
-      color: #555;
-      border-bottom: 1px solid #eee;
+      color: #444;
+      border-bottom: 1px dashed #ddd;
     }
     .price-card .btn {
-      margin-top: 20px;
+      margin-top: 25px;
       width: 100%;
+      border-radius: 30px;
+      font-size: 15px;
+      letter-spacing: 0.5px;
     }
 
-    /* Popular Badge */
+    /* Popular Card */
     .popular {
-      border: 2px solid var(--primary);
+      border: 3px solid var(--primary);
       transform: scale(1.05);
     }
     .popular::before {
-      content: "Most Popular";
+      content: "🔥 Most Popular";
       position: absolute;
-      top: 15px;
+      top: 20px;
       right: -40px;
       background: var(--primary);
       color: #fff;
-      padding: 5px 50px;
+      padding: 5px 55px;
       font-size: 12px;
       transform: rotate(45deg);
       font-weight: bold;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
     }
 
     /* CTA */
@@ -146,24 +162,32 @@
       text-align: center;
       background: var(--gradient);
       color: #fff;
-      padding: 60px 20px;
-      margin-top: 60px;
+      padding: 80px 20px;
+      margin-top: 80px;
+      border-radius: var(--radius);
+      width: 90%;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     }
-    .cta h2 { font-size: 32px; margin-bottom: 20px; }
-    .cta .btn { background: #fff; color: var(--primary); }
+    .cta h2 { font-size: 34px; margin-bottom: 20px; font-weight: 700; }
+    .cta .btn { background: #fff; color: var(--primary); border-radius: 30px; }
 
     footer {
       background: var(--dark);
       padding: 30px;
       text-align: center;
+      margin-top: 80px;
     }
     footer p { color: #ccc; font-size: 14px; }
+
     @keyframes gradientBG {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
- @media (max-width: 768px) {
+     @media (max-width: 768px) {
     /* Navbar */
     nav ul {
       display: none;
@@ -195,8 +219,6 @@
     .services-grid { grid-template-columns: 1fr; gap: 20px; }
     .service-card { text-align: center; }
 
-    /* Carousel Fix for Mobile */
-
   </style>
 </head>
 <body>
@@ -222,8 +244,8 @@
 
   <!-- Page Header -->
   <section class="page-header">
-    <h1>Our Pricing</h1>
-    <p>Affordable, transparent, and designed to suit all your embroidery needs</p>
+    <h1>Pricing Plans</h1>
+    <p>Choose the plan that fits your embroidery needs</p>
   </section>
 
   <!-- Pricing Section -->
@@ -233,7 +255,7 @@
       <div class="price">$15</div>
       <ul class="features">
         <li>Simple Logo Digitizing</li>
-        <li>Under 5,000 stitches</li>
+        <li>Up to 5,000 stitches</li>
         <li>1 Revision</li>
         <li>48 Hours Delivery</li>
       </ul>
@@ -254,12 +276,12 @@
 
     <div class="price-card">
       <h3>Premium</h3>
-      <div class="price">$40</div>
+      <div class="price">$45</div>
       <ul class="features">
         <li>Complex/Mascot Designs</li>
         <li>Up to 30,000 stitches</li>
         <li>Unlimited Revisions</li>
-        <li>24 Hours Delivery</li>
+        <li>Priority Delivery (12h)</li>
       </ul>
       <a href="contact.html" class="btn">Get Started</a>
     </div>
@@ -267,8 +289,8 @@
 
   <!-- CTA -->
   <section class="cta">
-    <h2>Need a Custom Quote?</h2>
-    <a href="contact.html" class="btn">📩 Request Custom Pricing</a>
+    <h2>Need Bulk or Custom Pricing?</h2>
+    <a href="contact.html" class="btn">📩 Request a Custom Quote</a>
   </section>
 
   <!-- Footer -->
@@ -282,4 +304,3 @@
 
 </body>
 </html>
-
