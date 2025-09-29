@@ -283,18 +283,22 @@
 
 
     <!-- Contact Form -->
-    <div class="contact-card">
-      <h2>Send Us a Message</h2>
-      <form action="https://formspree.io/f/xnnbeqpb" method="POST" enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="👤 Your Name" required>
-        <input type="email" name="_replyto" placeholder="📧 Your Email" required>
-        <input type="text" name="subject" placeholder="📝 Subject">
-        <textarea name="message" placeholder="💬 Your Message" required></textarea>
-        <input type="file" name="file">
-        <button type="submit" class="btn">📩 Send Message</button>
-      </form>
-    </div>
-  </section>
+<div class="contact-card">
+  <h2>Send Us a Message</h2>
+  <form action="https://formspree.io/f/xnnbeqpb" method="POST">
+    <!-- Redirect to your own thank-you page -->
+    <input type="hidden" name="_redirect" value="https://www.goventuresembroidery.shop/thanks.html">
+
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="_replyto" placeholder="Your Email" required>
+    <input type="text" name="subject" placeholder="Subject">
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <input type="file" name="file">
+
+    <button type="submit" class="btn">📩 Send Message</button>
+  </form>
+</div>
+
 
   <!-- Map -->
   <div class="map">
