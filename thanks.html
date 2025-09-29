@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You - Go Ventures Embroidery</title>
+  <style>
+    :root {
+      --primary: #e91e63;
+      --dark: #1a1a1a;
+      --light: #fff;
+      --gradient: linear-gradient(-45deg, #ff80ab, #e91e63, #ad1457, #880e4f);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      margin: 0;
+      background: var(--gradient);
+      color: var(--light);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+    .thank-box {
+      background: rgba(255,255,255,0.12);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      max-width: 500px;
+      backdrop-filter: blur(12px);
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+    p {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 25px;
+    }
+    .btn {
+      background: var(--primary);
+      color: var(--light);
+      padding: 12px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      box-shadow: 0 8px 20px rgba(233,30,99,0.4);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo -->
+  <div class="logo">Go Ventures Embroidery</div>
+
+  <!-- Thank You Message -->
+  <div class="thank-box">
+    <h1>🎉 Thank You!</h1>
+    <p>Your message has been successfully sent. We’ll get back to you soon.</p>
+    <a href="index.html" class="btn">⬅ Back to Home</a>
+  </div>
+</body>
+</html>
