@@ -592,6 +592,48 @@
     footer { padding: 20px; }
     footer p { font-size: 12px; }
   }
+
+
+/* Text Slider Section */
+.text-slider-section {
+  background: var(--gradient);
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.text-slider h2 {
+  font-size: 38px;
+  font-weight: 800;
+  position: relative;
+  overflow: hidden;
+  height: 50px; /* height of one line */
+}
+
+.slider-text {
+  display: block;
+  animation: slideText 9s infinite;
+  line-height: 50px;
+}
+
+@keyframes slideText {
+  0%, 20% { transform: translateY(0%); }
+  25%, 45% { transform: translateY(-100%); }
+  50%, 70% { transform: translateY(-200%); }
+  75%, 100% { transform: translateY(0%); }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .text-slider h2 {
+    font-size: 26px;
+    height: 40px;
+  }
+  .slider-text {
+    line-height: 40px;
+  }
+}
+
 </style>
 
 
@@ -756,18 +798,14 @@
 </section>
 
 
-<!-- Portfolio -->
-<section class="portfolio" style="background: linear-gradient(135deg,#ff80ab,#e91e63,#ad1457); padding: 100px 20px;">
-  <h2 style="color:#fff;">Our Portfolio</h2>
-  <div class="carousel">
-    <button class="carousel-btn prev-btn">‹</button>
-
-    <div class="carousel-slide"><img src="images/mockup1.png" alt="Portfolio 1"></div>
-    <div class="carousel-slide"><img src="images/mockup2.png" alt="Portfolio 2"></div>
-    <div class="carousel-slide"><img src="images/mockup3.png" alt="Portfolio 3"></div>
-    <div class="carousel-slide"><img src="images/mockup4.jpg" alt="Portfolio 4"></div>
-
-    <button class="carousel-btn next-btn">›</button>
+<!-- Text Slider Section -->
+<section class="text-slider-section">
+  <div class="text-slider">
+    <h2>
+      <span class="slider-text">Get Ready to get your design now!</span>
+      <span class="slider-text">Fast turnaround, premium quality</span>
+      <span class="slider-text">Embroidery digitizing made simple</span>
+    </h2>
   </div>
 </section>
 
