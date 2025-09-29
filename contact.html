@@ -146,6 +146,30 @@
     .contact-header h1 { font-size: 34px; }
     .contact-header p { font-size: 15px; }
   }
+    @media (max-width: 768px) {
+    /* Navbar */
+    nav ul {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      background: #fff;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+    nav ul.show { display: flex; }
+    .menu-toggle { display: block; }
+    /* About */
+    .about-container { flex-direction: column; text-align: center; gap: 30px; }
+    .about-text h2 { font-size: 28px; }
+
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 20px; }
+    .service-card { text-align: center; }
+
   </style>
 </head>
 <body>
@@ -252,3 +276,4 @@
 </script>
 </body>
 </html>
+
