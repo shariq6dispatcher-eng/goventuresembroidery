@@ -544,23 +544,43 @@
     .services-grid { grid-template-columns: 1fr; gap: 20px; }
     .service-card { text-align: center; }
 
-    /* Carousel */
-    .carousel {
-      height: auto;
-      max-width: 100%;
-      overflow: hidden;
-    }
-    .carousel-slide {
-      position: relative !important;
-      width: 100% !important;
-      opacity: 0 !important;
-      transform: none !important;
-      filter: none !important;
-    }
-    .carousel-slide.active { opacity: 1 !important; }
-    .carousel-slide img { max-height: 220px; object-fit: contain; margin: auto; }
-    .carousel-btn { font-size: 22px; padding: 6px 10px; }
-
+    /* Carousel Fix for Mobile */
+@media (max-width: 768px) {
+  .carousel {
+    height: auto;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .carousel-slide {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: auto !important;
+    opacity: 0;
+    transform: none !important;
+    filter: none !important;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .carousel-slide.active {
+    opacity: 1 !important;
+    position: relative !important;
+  }
+  .carousel-slide img {
+    width: 100%;
+    height: auto;
+    max-height: 280px;
+    object-fit: contain;
+    margin: auto;
+    display: block;
+  }
+  .carousel-btn {
+    font-size: 22px;
+    padding: 6px 10px;
+    z-index: 10;
+  }
+}
     /* Stats */
     .stats-inner { flex-direction: column; gap: 20px; }
     .stat h3 { font-size: 28px; }
