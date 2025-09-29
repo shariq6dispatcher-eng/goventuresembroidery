@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoVentures Embroidery - Pricing</title>
+  <style>
+    :root {
+      --primary: #e91e63;
+      --dark: #1a1a1a;
+      --light: #fff;
+      --muted: #777;
+      --radius: 16px;
+      --gradient: linear-gradient(-45deg, #ff80ab, #e91e63, #ad1457, #880e4f);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: var(--light); color: var(--dark); line-height: 1.6; }
+
+    header {
+      background: var(--light);
+      padding: 15px 30px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a { font-weight: 500; color: var(--dark); }
+    nav ul li a:hover { color: var(--primary); }
+.menu-toggle { display: none; font-size: 28px; cursor: pointer; color: var(--primary); background: none; border: none; }    
+.btn {
+      background: var(--primary);
+      color: var(--light);
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      transition: all .3s;
+      display: inline-block;
+    }
+    .btn:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(233,30,99,.5); }
+
+    /* Header Banner */
+    .page-header {
+      background: var(--gradient);
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+    }
+    .page-header h1 {
+      font-size: 42px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .page-header p { font-size: 18px; opacity: 0.9; }
+
+    /* Pricing Section */
+    .pricing {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 30px;
+    }
+    .price-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 40px 25px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      transition: transform .3s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .price-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(233,30,99,0.25);
+    }
+    .price-card h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    .price {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .features {
+      list-style: none;
+      text-align: left;
+      margin: 20px 0;
+      padding: 0;
+    }
+    .features li {
+      padding: 8px 0;
+      font-size: 15px;
+      color: #555;
+      border-bottom: 1px solid #eee;
+    }
+    .price-card .btn {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    /* Popular Badge */
+    .popular {
+      border: 2px solid var(--primary);
+      transform: scale(1.05);
+    }
+    .popular::before {
+      content: "Most Popular";
+      position: absolute;
+      top: 15px;
+      right: -40px;
+      background: var(--primary);
+      color: #fff;
+      padding: 5px 50px;
+      font-size: 12px;
+      transform: rotate(45deg);
+      font-weight: bold;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      background: var(--gradient);
+      color: #fff;
+      padding: 60px 20px;
+      margin-top: 60px;
+    }
+    .cta h2 { font-size: 32px; margin-bottom: 20px; }
+    .cta .btn { background: #fff; color: var(--primary); }
+
+    footer {
+      background: var(--dark);
+      padding: 30px;
+      text-align: center;
+    }
+    footer p { color: #ccc; font-size: 14px; }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+ @media (max-width: 768px) {
+    /* Navbar */
+    nav ul {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      background: #fff;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,.15);
+    }
+    nav ul.show { display: flex; }
+    .menu-toggle { display: block; }
+
+    /* Hero */
+    .hero-inner { flex-direction: column; text-align: center; gap: 20px; }
+    .hero-text { padding: 20px; }
+    .hero-text h1 { font-size: 34px; line-height: 1.2; }
+    .hero-text p { font-size: 16px; margin: 0 auto 20px; }
+    .hero-img img { max-width: 280px; }
+
+    /* About */
+    .about-container { flex-direction: column; text-align: center; gap: 30px; }
+    .about-text h2 { font-size: 28px; }
+
+    /* Services */
+    .services-grid { grid-template-columns: 1fr; gap: 20px; }
+    .service-card { text-align: center; }
+
+    /* Carousel Fix for Mobile */
+
+  </style>
+</head>
+<body>
+
+ <!-- Header -->
+  <header>
+  <div class="nav">
+    <div class="logo">GoVentures Embroidery</div>
+    <button class="menu-toggle">☰</button> <!-- 👈 add this -->
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a class="btn" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>Our Pricing</h1>
+    <p>Affordable, transparent, and designed to suit all your embroidery needs</p>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="pricing">
+    <div class="price-card">
+      <h3>Basic</h3>
+      <div class="price">$15</div>
+      <ul class="features">
+        <li>Simple Logo Digitizing</li>
+        <li>Up to 5,000 stitches</li>
+        <li>1 Revision</li>
+        <li>48 Hours Delivery</li>
+      </ul>
+      <a href="contact.html" class="btn">Get Started</a>
+    </div>
+
+    <div class="price-card popular">
+      <h3>Standard</h3>
+      <div class="price">$25</div>
+      <ul class="features">
+        <li>Detailed Logo Digitizing</li>
+        <li>Up to 15,000 stitches</li>
+        <li>2 Revisions</li>
+        <li>24 Hours Delivery</li>
+      </ul>
+      <a href="contact.html" class="btn">Get Started</a>
+    </div>
+
+    <div class="price-card">
+      <h3>Premium</h3>
+      <div class="price">$45</div>
+      <ul class="features">
+        <li>Complex/Mascot Designs</li>
+        <li>Up to 30,000 stitches</li>
+        <li>Unlimited Revisions</li>
+        <li>Priority Delivery (12h)</li>
+      </ul>
+      <a href="contact.html" class="btn">Get Started</a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Need a Custom Quote?</h2>
+    <a href="contact.html" class="btn">📩 Request Custom Pricing</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© <span id="year"></span> GoVentures Embroidery. All rights reserved.</p>
+  </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
