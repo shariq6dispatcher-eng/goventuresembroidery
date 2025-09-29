@@ -160,53 +160,6 @@
     }
     nav ul.show { display: flex; }
     .menu-toggle { display: block; }
-    /* About */
-    .about-container { flex-direction: column; text-align: center; gap: 30px; }
-    .about-text h2 { font-size: 28px; }
-
-    /* Services */
-    .services-grid { grid-template-columns: 1fr; gap: 20px; }
-    .service-card { text-align: center; }
-/* Text Slider Section */
-.text-slider-section {
-  background: var(--gradient);
-  color: #fff;
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.text-slider h2 {
-  font-size: 38px;
-  font-weight: 800;
-  position: relative;
-  overflow: hidden;
-  height: 50px; /* height of one line */
-}
-
-.slider-text {
-  display: block;
-  animation: slideText 9s infinite;
-  line-height: 50px;
-}
-
-@keyframes slideText {
-  0%, 20% { transform: translateY(0%); }
-  25%, 45% { transform: translateY(-100%); }
-  50%, 70% { transform: translateY(-200%); }
-  75%, 100% { transform: translateY(0%); }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .text-slider h2 {
-    font-size: 26px;
-    height: 40px;
-  }
-  .slider-text {
-    line-height: 40px;
-  }
-}
-
   </style>
 </head>
 <body>
@@ -317,4 +270,5 @@
 
 </body>
 </html>
+
 
