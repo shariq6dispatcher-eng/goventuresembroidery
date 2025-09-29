@@ -272,9 +272,15 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
+<script>
+  document.querySelector(".menu-toggle").addEventListener("click", () => {
+    document.querySelector("nav ul").classList.toggle("show");
+  });
+</script>
 
 </body>
 </html>
+
 
 
 
