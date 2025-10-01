@@ -11,10 +11,10 @@
       --light: #fff;
       --muted: #777;
       --radius: 16px;
-      --gradient: linear-gradient(-45deg, #ff80ab, #e91e63, #ad1457, #880e4f);
+      --gradient: linear-gradient(135deg, #ff80ab, #e91e63, #ad1457, #880e4f);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    body { margin:0; background:#fff; color:var(--dark); }
+    body { margin:0; background:#fafafa; color:var(--dark); }
 
     /* Header */
     header { background:#fff; padding:15px 30px; border-bottom:1px solid #eee; position:sticky; top:0; z-index:50; }
@@ -31,69 +31,79 @@
       background:var(--gradient);
       color:#fff;
       text-align:center;
-      padding:100px 20px 60px;
+      padding:100px 20px 70px;
       animation:gradientBG 12s ease infinite;
     }
     .portfolio-hero h1 { font-size:46px; font-weight:800; margin-bottom:15px; }
     .portfolio-hero p { font-size:18px; max-width:700px; margin:auto; opacity:.9; }
 
     /* Filters */
-    .filters { text-align:center; margin:40px 0 20px; }
+    .filters { text-align:center; margin:40px 0 30px; }
     .filters button {
       background:#fff; border:1px solid var(--primary); color:var(--primary);
-      padding:8px 18px; border-radius:30px; margin:5px; cursor:pointer;
-      font-weight:600; transition:.3s;
+      padding:10px 20px; border-radius:50px; margin:5px; cursor:pointer;
+      font-weight:600; transition:.3s; box-shadow:0 2px 8px rgba(0,0,0,.05);
     }
-    .filters button.active, .filters button:hover { background:var(--primary); color:#fff; }
+    .filters button.active,
+    .filters button:hover {
+      background:var(--gradient); color:#fff; border:none;
+      box-shadow:0 4px 15px rgba(233,30,99,.3);
+    }
 
     /* Portfolio Grid */
     .portfolio-grid {
-      max-width:1200px; margin:0 auto 80px;
+      max-width:1200px; margin:0 auto 100px;
       display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:25px; padding:0 20px;
+      gap:30px; padding:0 20px;
     }
     .portfolio-card {
       position:relative; border-radius:var(--radius);
-      overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,.1);
-      cursor:pointer; background:#fff; transition:transform .3s;
+      overflow:hidden; background:#fff;
+      box-shadow:0 8px 25px rgba(0,0,0,.08);
+      transition:transform .3s, box-shadow .3s;
     }
     .portfolio-card img {
-  width: 100%;
-  height: auto;           /* Keep natural proportions */
-  object-fit: contain;    /* Show the full embroidery design */
-  background: #f9f9f9;    /* Soft background so transparent edges look clean */
-  padding: 15px;          /* Some breathing space around designs */
-  border-radius: 12px;    /* Rounded corners */
-}
+      width:100%; height:240px; object-fit:contain;
+      background:#f3f3f3; padding:15px;
+      transition:transform .5s;
+    }
+    .portfolio-card:hover { transform:translateY(-8px); box-shadow:0 12px 35px rgba(233,30,99,.25); }
+    .portfolio-card:hover img { transform:scale(1.05); }
 
-    .portfolio-card:hover img { transform:scale(1.08); }
     .portfolio-info {
       position:absolute; bottom:0; left:0; right:0;
-      background:rgba(0,0,0,.6); color:#fff; padding:15px; text-align:center;
+      background:rgba(0,0,0,.65); color:#fff;
+      padding:15px; text-align:center;
       transform:translateY(100%); transition:.4s;
     }
     .portfolio-card:hover .portfolio-info { transform:translateY(0); }
     .portfolio-info h3 { font-size:18px; margin:0; }
     .portfolio-info p { font-size:14px; margin:6px 0 0; }
 
-    /* Lightbox */
+    /* Lightbox Modern */
     .lightbox {
       display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,.8); justify-content:center; align-items:center;
-      z-index:999; padding:20px;
+      background:rgba(0,0,0,.9); justify-content:center; align-items:center;
+      z-index:999; padding:20px; flex-direction:column;
     }
     .lightbox img {
       max-width:90%; max-height:80%; border-radius:12px;
-      box-shadow:0 10px 30px rgba(0,0,0,.5);
+      box-shadow:0 10px 40px rgba(0,0,0,.6);
       animation:fadeIn .4s ease;
     }
-    .lightbox:target { display:flex; }
-    .lightbox-close {
-      position:absolute; top:30px; right:40px; font-size:32px;
-      color:#fff; text-decoration:none; font-weight:bold;
-      transition:.3s;
+    .lightbox.active { display:flex; }
+    .lightbox-close, .lightbox-prev, .lightbox-next {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(255,255,255,.2); color:#fff;
+      border:none; font-size:30px; padding:12px;
+      border-radius:50%; cursor:pointer; transition:.3s;
     }
-    .lightbox-close:hover { color:var(--primary); }
+    .lightbox-close { top:30px; right:40px; transform:none; }
+    .lightbox-prev { left:30px; }
+    .lightbox-next { right:30px; }
+    .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
+      background:var(--primary);
+    }
 
     footer { background:#1a1a1a; padding:30px; text-align:center; color:#ccc; font-size:14px; }
 
@@ -110,7 +120,7 @@
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html">Services</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="portfolio.html" class="active">Portfolio</a></li>
         <li><a href="pricing.html">Pricing</a></li>
         <li><a href="testimonials.html">Testimonials</a></li>
         <li><a class="btn" href="contact.html">Contact</a></li>
@@ -120,8 +130,8 @@
 </header>
 
 <section class="portfolio-hero">
-  <h1>Our Creative Portfolio</h1>
-  <p>Click on a project to view it in full size.</p>
+  <h1>Our Modern Portfolio</h1>
+  <p>Browse embroidery digitizing, vector art, and custom designs — click to view full size.</p>
 </section>
 
 <!-- Filter Buttons -->
@@ -135,40 +145,30 @@
 
 <!-- Portfolio Grid -->
 <section class="portfolio-grid">
-  <a href="#img1" class="portfolio-card logo">
+  <div class="portfolio-card logo" onclick="openLightbox(0)">
     <img src="images/portfolio1.jpg" alt="Logo Digitizing">
     <div class="portfolio-info"><h3>Logo Digitizing</h3><p>Optimized stitches for caps & uniforms.</p></div>
-  </a>
-  <a href="#img2" class="portfolio-card vector">
+  </div>
+  <div class="portfolio-card vector" onclick="openLightbox(1)">
     <img src="images/portfolio2.jpg" alt="Vector Art">
     <div class="portfolio-info"><h3>Vector Conversion</h3><p>Sharp and scalable artwork redraw.</p></div>
-  </a>
-  <a href="#img3" class="portfolio-card 3d">
+  </div>
+  <div class="portfolio-card 3d" onclick="openLightbox(2)">
     <img src="images/portfolio4.jpg" alt="3D Puff">
     <div class="portfolio-info"><h3>3D Puff Design</h3><p>Bold dimensional embroidery effects.</p></div>
-  </a>
-  <a href="#img4" class="portfolio-card custom">
+  </div>
+  <div class="portfolio-card custom" onclick="openLightbox(3)">
     <img src="images/portfolio5.jpg" alt="Custom Artwork">
     <div class="portfolio-info"><h3>Custom Mascot</h3><p>Complex artwork digitized stitch-by-stitch.</p></div>
-  </a>
+  </div>
 </section>
 
-<!-- Lightboxes -->
-<div id="img1" class="lightbox">
-  <a href="#" class="lightbox-close">&times;</a>
-  <img src="images/portfolio1.jpg" alt="">
-</div>
-<div id="img2" class="lightbox">
-  <a href="#" class="lightbox-close">&times;</a>
-  <img src="images/portfolio2.jpg" alt="">
-</div>
-<div id="img3" class="lightbox">
-  <a href="#" class="lightbox-close">&times;</a>
-  <img src="images/portfolio4.jpg" alt="">
-</div>
-<div id="img4" class="lightbox">
-  <a href="#" class="lightbox-close">&times;</a>
-  <img src="images/portfolio5.jpeg" alt="">
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <button class="lightbox-prev" onclick="changeSlide(-1)">&#10094;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button class="lightbox-next" onclick="changeSlide(1)">&#10095;</button>
 </div>
 
 <footer>
@@ -178,6 +178,7 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  // Filtering
   function filterItems(category) {
     let cards = document.querySelectorAll('.portfolio-card');
     let buttons = document.querySelectorAll('.filters button');
@@ -191,8 +192,29 @@
       }
     });
   }
+
+  // Lightbox
+  const images = [
+    "images/portfolio1.jpg",
+    "images/portfolio2.jpg",
+    "images/portfolio4.jpg",
+    "images/portfolio5.jpg"
+  ];
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    document.getElementById("lightbox").classList.add("active");
+    document.getElementById("lightbox-img").src = images[currentIndex];
+  }
+  function closeLightbox() {
+    document.getElementById("lightbox").classList.remove("active");
+  }
+  function changeSlide(n) {
+    currentIndex = (currentIndex + n + images.length) % images.length;
+    document.getElementById("lightbox-img").src = images[currentIndex];
+  }
 </script>
 
 </body>
 </html>
-
