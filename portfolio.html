@@ -14,14 +14,16 @@
       --gradient: linear-gradient(135deg, #ff80ab, #e91e63, #ad1457, #880e4f);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    body { margin:0; background:#fafafa; color:var(--dark); }
+    body { margin:0; background:#fafafa; color:var(--dark); transition:background .3s, color .3s; }
+    body.dark { background:#121212; color:#f1f1f1; }
 
     /* Header */
     header { background:#fff; padding:15px 30px; border-bottom:1px solid #eee; position:sticky; top:0; z-index:50; }
+    body.dark header { background:#1e1e1e; border-bottom:1px solid #333; }
     .nav { display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:auto; }
     .logo { font-size:22px; font-weight:bold; color:var(--primary); }
     nav ul { list-style:none; display:flex; gap:20px; }
-    nav ul li a { text-decoration:none; font-weight:500; color:var(--dark); transition:.2s; }
+    nav ul li a { text-decoration:none; font-weight:500; color:inherit; transition:.2s; }
     nav ul li a:hover { color:var(--primary); }
     .btn { background:var(--primary); color:#fff; padding:10px 20px; border-radius:var(--radius); font-weight:600; text-decoration:none; transition:.3s; }
     .btn:hover { transform:scale(1.05); box-shadow:0 4px 15px rgba(233,30,99,.5); }
@@ -29,13 +31,21 @@
     /* Hero */
     .portfolio-hero {
       background:var(--gradient);
-      color:#fff;
-      text-align:center;
+      color:#fff; text-align:center;
       padding:100px 20px 70px;
       animation:gradientBG 12s ease infinite;
     }
     .portfolio-hero h1 { font-size:46px; font-weight:800; margin-bottom:15px; }
     .portfolio-hero p { font-size:18px; max-width:700px; margin:auto; opacity:.9; }
+
+    /* Dark mode toggle */
+    .dark-toggle {
+      position:fixed; top:20px; right:20px; background:#fff;
+      border:none; padding:10px 15px; border-radius:30px;
+      cursor:pointer; font-size:16px; z-index:1000;
+      box-shadow:0 4px 10px rgba(0,0,0,.15);
+    }
+    body.dark .dark-toggle { background:#333; color:#fff; }
 
     /* Filters */
     .filters { text-align:center; margin:40px 0 30px; }
@@ -43,6 +53,7 @@
       background:#fff; border:1px solid var(--primary); color:var(--primary);
       padding:10px 20px; border-radius:50px; margin:5px; cursor:pointer;
       font-weight:600; transition:.3s; box-shadow:0 2px 8px rgba(0,0,0,.05);
+      display:inline-flex; align-items:center; gap:6px;
     }
     .filters button.active,
     .filters button:hover {
@@ -50,20 +61,25 @@
       box-shadow:0 4px 15px rgba(233,30,99,.3);
     }
 
-    /* Portfolio Grid */
+    /* Masonry Grid */
     .portfolio-grid {
       max-width:1200px; margin:0 auto 100px;
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:30px; padding:0 20px;
+      column-count:3; column-gap:20px;
+      padding:0 20px;
     }
+    @media(max-width:900px){ .portfolio-grid{ column-count:2; } }
+    @media(max-width:600px){ .portfolio-grid{ column-count:1; } }
+
     .portfolio-card {
-      position:relative; border-radius:var(--radius);
-      overflow:hidden; background:#fff;
+      display:inline-block; width:100%; margin:0 0 20px;
+      border-radius:var(--radius); background:#fff;
       box-shadow:0 8px 25px rgba(0,0,0,.08);
       transition:transform .3s, box-shadow .3s;
+      overflow:hidden; opacity:0; transform:translateY(30px);
     }
+    .portfolio-card.show { opacity:1; transform:translateY(0); transition:all .6s ease; }
     .portfolio-card img {
-      width:100%; height:240px; object-fit:contain;
+      width:100%; height:auto; object-fit:contain;
       background:#f3f3f3; padding:15px;
       transition:transform .5s;
     }
@@ -71,27 +87,20 @@
     .portfolio-card:hover img { transform:scale(1.05); }
 
     .portfolio-info {
-      position:absolute; bottom:0; left:0; right:0;
-      background:rgba(0,0,0,.65); color:#fff;
-      padding:15px; text-align:center;
-      transform:translateY(100%); transition:.4s;
+      padding:15px; text-align:center; background:#fff;
     }
-    .portfolio-card:hover .portfolio-info { transform:translateY(0); }
-    .portfolio-info h3 { font-size:18px; margin:0; }
-    .portfolio-info p { font-size:14px; margin:6px 0 0; }
+    .portfolio-info h3 { margin:0; font-size:18px; color:var(--primary); }
+    .portfolio-info p { font-size:14px; color:var(--muted); }
 
-    /* Lightbox Modern */
+    /* Lightbox */
     .lightbox {
       display:none; position:fixed; top:0; left:0; width:100%; height:100%;
       background:rgba(0,0,0,.9); justify-content:center; align-items:center;
       z-index:999; padding:20px; flex-direction:column;
     }
-    .lightbox img {
-      max-width:90%; max-height:80%; border-radius:12px;
-      box-shadow:0 10px 40px rgba(0,0,0,.6);
-      animation:fadeIn .4s ease;
-    }
+    .lightbox img { max-width:90%; max-height:80%; border-radius:12px; animation:fadeIn .4s ease; }
     .lightbox.active { display:flex; }
+    .lightbox-caption { margin-top:15px; color:#fff; font-size:16px; }
     .lightbox-close, .lightbox-prev, .lightbox-next {
       position:absolute; top:50%; transform:translateY(-50%);
       background:rgba(255,255,255,.2); color:#fff;
@@ -101,14 +110,25 @@
     .lightbox-close { top:30px; right:40px; transform:none; }
     .lightbox-prev { left:30px; }
     .lightbox-next { right:30px; }
-    .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover {
-      background:var(--primary);
-    }
+    .lightbox-close:hover, .lightbox-prev:hover, .lightbox-next:hover { background:var(--primary); }
 
+    /* Back to top */
+    .back-to-top {
+      position:fixed; bottom:30px; right:30px;
+      background:var(--primary); color:#fff;
+      padding:12px 16px; border-radius:50%; font-size:20px;
+      cursor:pointer; display:none; box-shadow:0 6px 20px rgba(0,0,0,.25);
+    }
+    .back-to-top.show { display:block; }
+
+    /* Footer */
     footer { background:#1a1a1a; padding:30px; text-align:center; color:#ccc; font-size:14px; }
+    .brands { display:flex; gap:40px; justify-content:center; flex-wrap:wrap; margin-top:20px; }
+    .brands img { height:40px; filter:grayscale(100%); opacity:.7; transition:.3s; }
+    .brands img:hover { filter:none; opacity:1; }
 
     @keyframes gradientBG { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    @keyframes fadeIn { from{opacity:0; transform:scale(.95);} to{opacity:1; transform:scale(1);} }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
   </style>
 </head>
 <body>
@@ -129,36 +149,38 @@
   </div>
 </header>
 
+<button class="dark-toggle" onclick="toggleDark()">🌙</button>
+
 <section class="portfolio-hero">
   <h1>Our Modern Portfolio</h1>
   <p>Browse embroidery digitizing, vector art, and custom designs — click to view full size.</p>
 </section>
 
-<!-- Filter Buttons -->
+<!-- Filters -->
 <div class="filters">
-  <button class="active" onclick="filterItems('all')">All</button>
-  <button onclick="filterItems('logo')">Logos</button>
-  <button onclick="filterItems('vector')">Vector Art</button>
-  <button onclick="filterItems('3d')">3D Puff</button>
-  <button onclick="filterItems('custom')">Custom</button>
+  <button class="active" onclick="filterItems('all')">🌐 All</button>
+  <button onclick="filterItems('logo')">🏷️ Logos</button>
+  <button onclick="filterItems('vector')">🎨 Vector Art</button>
+  <button onclick="filterItems('3d')">🧢 3D Puff</button>
+  <button onclick="filterItems('custom')">🖌️ Custom</button>
 </div>
 
-<!-- Portfolio Grid -->
+<!-- Portfolio Masonry Grid -->
 <section class="portfolio-grid">
   <div class="portfolio-card logo" onclick="openLightbox(0)">
-    <img src="images/portfolio1.jpg" alt="Logo Digitizing">
+    <img src="images/portfolio1.jpg" alt="Logo Digitizing" loading="lazy">
     <div class="portfolio-info"><h3>Logo Digitizing</h3><p>Optimized stitches for caps & uniforms.</p></div>
   </div>
   <div class="portfolio-card vector" onclick="openLightbox(1)">
-    <img src="images/portfolio2.jpg" alt="Vector Art">
+    <img src="images/portfolio2.jpg" alt="Vector Art" loading="lazy">
     <div class="portfolio-info"><h3>Vector Conversion</h3><p>Sharp and scalable artwork redraw.</p></div>
   </div>
   <div class="portfolio-card 3d" onclick="openLightbox(2)">
-    <img src="images/portfolio4.jpg" alt="3D Puff">
+    <img src="images/portfolio4.jpg" alt="3D Puff" loading="lazy">
     <div class="portfolio-info"><h3>3D Puff Design</h3><p>Bold dimensional embroidery effects.</p></div>
   </div>
   <div class="portfolio-card custom" onclick="openLightbox(3)">
-    <img src="images/portfolio5.jpg" alt="Custom Artwork">
+    <img src="images/portfolio5.jpg" alt="Custom Artwork" loading="lazy">
     <div class="portfolio-info"><h3>Custom Mascot</h3><p>Complex artwork digitized stitch-by-stitch.</p></div>
   </div>
 </section>
@@ -168,52 +190,66 @@
   <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
   <button class="lightbox-prev" onclick="changeSlide(-1)">&#10094;</button>
   <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
   <button class="lightbox-next" onclick="changeSlide(1)">&#10095;</button>
 </div>
 
+<!-- Back to top -->
+<div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'});">↑</div>
+
 <footer>
   <p>© <span id="year"></span> GoVentures Embroidery. All rights reserved.</p>
+  <div class="brands">
+    <img src="images/brand1.png" alt="Brand">
+    <img src="images/brand2.png" alt="Brand">
+    <img src="images/brand3.png" alt="Brand">
+  </div>
 </footer>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Filtering
+  // Dark mode
+  function toggleDark(){ document.body.classList.toggle("dark"); }
+
+  // Filtering with animation
   function filterItems(category) {
     let cards = document.querySelectorAll('.portfolio-card');
     let buttons = document.querySelectorAll('.filters button');
     buttons.forEach(btn => btn.classList.remove("active"));
     event.target.classList.add("active");
     cards.forEach(card => {
-      if (category === 'all' || card.classList.contains(category)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
+      card.style.display = (category === 'all' || card.classList.contains(category)) ? "inline-block" : "none";
     });
   }
 
+  // Scroll animation
+  const cards = document.querySelectorAll('.portfolio-card');
+  function revealOnScroll(){
+    cards.forEach(card=>{
+      let rect = card.getBoundingClientRect();
+      if(rect.top < window.innerHeight-50){ card.classList.add('show'); }
+    });
+  }
+  window.addEventListener('scroll', revealOnScroll); revealOnScroll();
+
   // Lightbox
   const images = [
-    "images/portfolio1.jpg",
-    "images/portfolio2.jpg",
-    "images/portfolio4.jpg",
-    "images/portfolio5.jpg"
+    {src:"images/portfolio1.jpg",caption:"Logo Digitizing - Cap Embroidery"},
+    {src:"images/portfolio2.jpg",caption:"Vector Conversion - Clean Artwork"},
+    {src:"images/portfolio4.jpg",caption:"3D Puff Design - Raised Embroidery"},
+    {src:"images/portfolio5.jpg",caption:"Custom Mascot - Complex Artwork"}
   ];
-  let currentIndex = 0;
+  let currentIndex=0;
+  function openLightbox(index){ currentIndex=index; document.getElementById("lightbox").classList.add("active"); updateLightbox(); }
+  function closeLightbox(){ document.getElementById("lightbox").classList.remove("active"); }
+  function changeSlide(n){ currentIndex=(currentIndex+n+images.length)%images.length; updateLightbox(); }
+  function updateLightbox(){ document.getElementById("lightbox-img").src=images[currentIndex].src; document.getElementById("lightbox-caption").textContent=images[currentIndex].caption; }
+  document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeLightbox(); if(e.key==="ArrowLeft") changeSlide(-1); if(e.key==="ArrowRight") changeSlide(1); });
 
-  function openLightbox(index) {
-    currentIndex = index;
-    document.getElementById("lightbox").classList.add("active");
-    document.getElementById("lightbox-img").src = images[currentIndex];
-  }
-  function closeLightbox() {
-    document.getElementById("lightbox").classList.remove("active");
-  }
-  function changeSlide(n) {
-    currentIndex = (currentIndex + n + images.length) % images.length;
-    document.getElementById("lightbox-img").src = images[currentIndex];
-  }
+  // Back to top toggle
+  const backToTop=document.querySelector(".back-to-top");
+  window.addEventListener("scroll", ()=>{ if(window.scrollY>300) backToTop.classList.add("show"); else backToTop.classList.remove("show"); });
 </script>
 
 </body>
