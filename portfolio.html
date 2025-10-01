@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - GoVentures Embroidery</title>
+  <style>
+    :root {
+      --primary: #e91e63;
+      --dark: #1a1a1a;
+      --light: #fff;
+      --muted: #777;
+      --radius: 16px;
+      --gradient: linear-gradient(-45deg, #ff80ab, #e91e63, #ad1457, #880e4f);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body { margin:0; background:#fff; color:var(--dark); }
+
+    /* Header */
+    header { background:#fff; padding:15px 30px; border-bottom:1px solid #eee; position:sticky; top:0; z-index:50; }
+    .nav { display:flex; justify-content:space-between; align-items:center; max-width:1200px; margin:auto; }
+    .logo { font-size:22px; font-weight:bold; color:var(--primary); }
+    nav ul { list-style:none; display:flex; gap:20px; }
+    nav ul li a { text-decoration:none; font-weight:500; color:var(--dark); transition:.2s; }
+    nav ul li a:hover { color:var(--primary); }
+    .btn { background:var(--primary); color:#fff; padding:10px 20px; border-radius:var(--radius); font-weight:600; text-decoration:none; transition:.3s; }
+    .btn:hover { transform:scale(1.05); box-shadow:0 4px 15px rgba(233,30,99,.5); }
+
+    /* Hero */
+    .portfolio-hero {
+      background:var(--gradient);
+      color:#fff;
+      text-align:center;
+      padding:100px 20px 60px;
+      animation:gradientBG 12s ease infinite;
+    }
+    .portfolio-hero h1 { font-size:46px; font-weight:800; margin-bottom:15px; }
+    .portfolio-hero p { font-size:18px; max-width:700px; margin:auto; opacity:.9; }
+
+    /* Filters */
+    .filters { text-align:center; margin:40px 0 20px; }
+    .filters button {
+      background:#fff; border:1px solid var(--primary); color:var(--primary);
+      padding:8px 18px; border-radius:30px; margin:5px; cursor:pointer;
+      font-weight:600; transition:.3s;
+    }
+    .filters button.active, .filters button:hover { background:var(--primary); color:#fff; }
+
+    /* Portfolio Grid */
+    .portfolio-grid {
+      max-width:1200px; margin:0 auto 80px;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:25px; padding:0 20px;
+    }
+    .portfolio-card {
+      position:relative; border-radius:var(--radius);
+      overflow:hidden; box-shadow:0 6px 20px rgba(0,0,0,.1);
+      cursor:pointer; background:#fff; transition:transform .3s;
+    }
+    .portfolio-card img { width:100%; height:220px; object-fit:cover; transition:transform .5s; }
+    .portfolio-card:hover img { transform:scale(1.08); }
+    .portfolio-info {
+      position:absolute; bottom:0; left:0; right:0;
+      background:rgba(0,0,0,.6); color:#fff; padding:15px; text-align:center;
+      transform:translateY(100%); transition:.4s;
+    }
+    .portfolio-card:hover .portfolio-info { transform:translateY(0); }
+    .portfolio-info h3 { font-size:18px; margin:0; }
+    .portfolio-info p { font-size:14px; margin:6px 0 0; }
+
+    /* Lightbox */
+    .lightbox {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,.8); justify-content:center; align-items:center;
+      z-index:999; padding:20px;
+    }
+    .lightbox img {
+      max-width:90%; max-height:80%; border-radius:12px;
+      box-shadow:0 10px 30px rgba(0,0,0,.5);
+      animation:fadeIn .4s ease;
+    }
+    .lightbox:target { display:flex; }
+    .lightbox-close {
+      position:absolute; top:30px; right:40px; font-size:32px;
+      color:#fff; text-decoration:none; font-weight:bold;
+      transition:.3s;
+    }
+    .lightbox-close:hover { color:var(--primary); }
+
+    footer { background:#1a1a1a; padding:30px; text-align:center; color:#ccc; font-size:14px; }
+
+    @keyframes gradientBG { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes fadeIn { from{opacity:0; transform:scale(.95);} to{opacity:1; transform:scale(1);} }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">GoVentures Embroidery</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="testimonials.html">Testimonials</a></li>
+        <li><a class="btn" href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="portfolio-hero">
+  <h1>Our Creative Portfolio</h1>
+  <p>Click on a project to view it in full size.</p>
+</section>
+
+<!-- Filter Buttons -->
+<div class="filters">
+  <button class="active" onclick="filterItems('all')">All</button>
+  <button onclick="filterItems('logo')">Logos</button>
+  <button onclick="filterItems('vector')">Vector Art</button>
+  <button onclick="filterItems('3d')">3D Puff</button>
+  <button onclick="filterItems('custom')">Custom</button>
+</div>
+
+<!-- Portfolio Grid -->
+<section class="portfolio-grid">
+  <a href="#img1" class="portfolio-card logo">
+    <img src="images/portfolio1.jpg" alt="Logo Digitizing">
+    <div class="portfolio-info"><h3>Logo Digitizing</h3><p>Optimized stitches for caps & uniforms.</p></div>
+  </a>
+  <a href="#img2" class="portfolio-card vector">
+    <img src="images/portfolio2.jpg" alt="Vector Art">
+    <div class="portfolio-info"><h3>Vector Conversion</h3><p>Sharp and scalable artwork redraw.</p></div>
+  </a>
+  <a href="#img3" class="portfolio-card 3d">
+    <img src="images/portfolio4.jpg" alt="3D Puff">
+    <div class="portfolio-info"><h3>3D Puff Design</h3><p>Bold dimensional embroidery effects.</p></div>
+  </a>
+  <a href="#img4" class="portfolio-card custom">
+    <img src="images/portfolio5.jpg" alt="Custom Artwork">
+    <div class="portfolio-info"><h3>Custom Mascot</h3><p>Complex artwork digitized stitch-by-stitch.</p></div>
+  </a>
+</section>
+
+<!-- Lightboxes -->
+<div id="img1" class="lightbox">
+  <a href="#" class="lightbox-close">&times;</a>
+  <img src="images/portfolio1.jpg" alt="">
+</div>
+<div id="img2" class="lightbox">
+  <a href="#" class="lightbox-close">&times;</a>
+  <img src="images/portfolio2.jpg" alt="">
+</div>
+<div id="img3" class="lightbox">
+  <a href="#" class="lightbox-close">&times;</a>
+  <img src="images/portfolio4.jpg" alt="">
+</div>
+<div id="img4" class="lightbox">
+  <a href="#" class="lightbox-close">&times;</a>
+  <img src="images/portfolio5.jpeg" alt="">
+</div>
+
+<footer>
+  <p>© <span id="year"></span> GoVentures Embroidery. All rights reserved.</p>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  function filterItems(category) {
+    let cards = document.querySelectorAll('.portfolio-card');
+    let buttons = document.querySelectorAll('.filters button');
+    buttons.forEach(btn => btn.classList.remove("active"));
+    event.target.classList.add("active");
+    cards.forEach(card => {
+      if (category === 'all' || card.classList.contains(category)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
